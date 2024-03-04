@@ -1,0 +1,67 @@
+#!/usr/bin/env sh
+# Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# MODIFICATION: Prints the percentage of volatile memory available.
+
+TYPE="${BLOCK_INSTANCE:-mem}"
+PERCENT="${PERCENT:-true}"
+
+awk -v type=$TYPE -v percent=$PERCENT '
+/^MemTotal:/ {
+   mem_total=$2
+}
+/^MemAvailable:/ {
+   mem_avl=$2
+}
+
+/^SwapFree:/ {
+    swap_avl=$2
+}
+
+/^SwapTotal:/ {
+    swap_total=$2
+}
+
+END {
+   mem_free=mem_avl/1024/1024
+   #used=(mem_total-mem_avl)/1024/1024
+   mem_total=mem_total/1024/1024
+
+   mem_pct=0
+   if (mem_total > 0) {
+       mem_pct=mem_free/mem_total*100
+   }
+
+   swap_free=swap_avl/1024/1024
+   #used=(swap_total-swap_avl)/1024/1024
+   swap_total=swap_total/1024/1024
+
+   swap_pct=0
+   if (swap_total > 0) {
+       swap_pct=swap_free/swap_total*100
+   }
+
+   printf("%.f%%\n%.f%%\n",swap_pct,swap_pct)
+
+   if (swap_pct > 50) {
+      print("#00FF05")
+   } else if (swap_pct > 20) {
+      print("#FFF600")
+   } else {
+      print("#FF7400")
+   }
+
+}
+' /proc/meminfo

@@ -1,0 +1,81 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+separator_block_width=15
+markup=pango
+
+[uptime]
+command=/bin/uptime | tr -s ' '
+interval=1
+min_width=12:20:29 up 999 days, 23:59, 1 user, load average: 99.99, 99.99, 99.99
+align=right
+
+[temperature]
+command=./scripts/temperature/temperature
+#label=
+interval=5
+T_WARN=70
+T_CRIT=90
+SENSOR_CHIP="coretemp-isa-0000"
+min_width=100°C
+align=center
+
+[memory0]
+command=./scripts/memory/memory0
+#label=
+instance=mem
+interval=5
+min_width=100%
+align=center
+
+[memory1]
+command=./scripts/memory/memory1
+#label=
+instance=swap
+interval=60
+min_width=100%
+align=center
+
+[battery]
+#command=cat /sys/class/power_supply/BAT0/capacity
+command=./scripts/battery/battery
+label=B:
+#label=⚡
+interval=60
+min_width=B:100%
+align=center
+
+[mediaplayer]
+command=./scripts/mediaplayer/mediaplayer
+label=Spotify:
+instance=spotify
+interval=5
+signal=10
+#min_width=24 characters excluding `Spotify:`
+align=right
+
+[date]
+command=date '+%d.%m.%y'
+interval=60
+min_width=31.12.99
+align=right
