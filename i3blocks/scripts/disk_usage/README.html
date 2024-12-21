@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Customizable disk block for i3blocks</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="customizable-disk-block-for-i3blocks">Customizable disk block for i3blocks</h1>
+<p>Script checks the disk usage of <strong>$BLOCK_INSTANCE</strong> using pythons <strong>os.statvfs</strong> module. If the instance isn't set the home-directory of the executing user will be set as default.</p>
+<p>So a standard configuration minding a specific partition would look as follows:</p>
+<pre><code>[disk_nas]
+label=:
+instance=/nas
+interval=30
+command=$SCRIPT_DIR/disk_usage/disk_usage
+</code></pre>
+<h2 id="arguments">Arguments</h2>
+<p>Additionally the script can take more arguments passed to it by command-line in a key=value fashion. The following is supported.</p>
+<h3 id="warning-threshold">Warning Threshold</h3>
+<p>The warning threshold in percent (used disk space).</p>
+<p>Display warnig color when 70% of the available disk space is used:
+<code>warn_threshold=70</code></p>
+<p><em>Default:</em> 80</p>
+<h3 id="critical-threshold">Critical Threshold</h3>
+<p>The critical threshold in percent (used disk space)</p>
+<p>Display critical color when 80% of the available disk space is used:
+<code>crit_threshold=80</code></p>
+<p><em>Default:</em> 90</p>
+<h3 id="warning-color">Warning Color</h3>
+<p>Hex-color code to use when <strong>warn_threshold</strong> is reached:
+<code>warn_color=#90ce00</code></p>
+<p><em>Default:</em> #d6af4e</p>
+<h3 id="critical-color">Critical Color</h3>
+<p>Hex-color code to use when <strong>crit_threshold</strong> is reached:
+<code>crit_color=#ce2500</code></p>
+<p><em>Default:</em> #d64e4e</p>
+<h3 id="output-format">Output Format</h3>
+<p>Output format used by pythons string formatting for displayment.</p>
+<p>To get:</p>
+<pre><code>: 119.3G used of 518.5 total beeing 23.0%
+</code></pre>
+<p>the following <em>format</em>-argument must be passed to the script:</p>
+<pre><code>format=&quot;{used:.1f}G used of {total:.1f} total beeing {perc_used}%&quot;
+</code></pre>
+<p>Quotes are required for format.</p>
+<h4 id="fields">Fields</h4>
+<ul>
+<li><strong>avail:</strong> available disk space in gigabytes</li>
+<li><strong>used:</strong> used disk space in gigabytes</li>
+<li><strong>total:</strong> total diskspace in gigabytes</li>
+<li><strong>perc_used:</strong> disk usage in percent</li>
+</ul>
+<h2 id="example">Example</h2>
+<pre><code>[disk_root]
+label=:
+instance=/
+interval=30
+command=$SCRIPT_DIR/disk_usage/disk_usage format=&quot;{used:.1f}G used of {total:.1f} Total beeing {perc_used}%&quot; warn_color=#90ce00
+</code></pre>
+<h2 id="click-events">Click events</h2>
+<p>Upon a click event a terminal is opened with ncdu running for the configured partition. To adapt this to your personal setup, you'll need to change the function <strong>launch_ncdu()</strong>:</p>
+<pre><code class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">launch_ncdu</span>(<span class="hljs-params">mp</span>):
+	cmd = [
+		<span class="hljs-string">&#x27;/usr/bin/sakura&#x27;</span>,
+		<span class="hljs-string">&#x27;-t&#x27;</span>,
+		<span class="hljs-string">&#x27;pop-up&#x27;</span>,
+		<span class="hljs-string">&#x27;-e&#x27;</span>,
+		<span class="hljs-string">&#x27;/usr/bin/ncdu %s&#x27;</span> % mp,
+		<span class="hljs-string">&#x27;-x&#x27;</span>,
+	]
+
+	subprocess.Popen(
+		cmd,
+		stdout=<span class="hljs-built_in">open</span>(os.devnull, <span class="hljs-string">&#x27;w&#x27;</span>),
+		stderr=subprocess.STDOUT
+	)
+</code></pre>
+<p>Personally, I launch sakura with <em>pop-up</em> as title, which i can then use to configure i3 to set the window into floating mode:</p>
+<pre><code>for_window [title=&quot;pop-up&quot;] floating enable border none sticky
+</code></pre>
+<p>Output of the launch-command will be redirected to /dev/null</p>
+<h2 id="dependancies">Dependancies</h2>
+<p>The script uses only standard python modules and should therefore run on any python environment or should easily be made to run.</p>
+<h2 id="help">Help</h2>
+<ul>
+<li>Advanced String Formatting: <a href="https://www.python.org/dev/peps/pep-3101/">https://www.python.org/dev/peps/pep-3101/</a></li>
+</ul>
+<h2 id="screenshot">Screenshot</h2>
+<p><img src="https://raw.githubusercontent.com/nevious/i3blocks_blocklets/master/disk_usage/screenshot.png" alt="screenshot"></p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

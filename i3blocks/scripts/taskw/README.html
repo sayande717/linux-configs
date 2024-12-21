@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Taskwarrior active task blocklet</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="taskwarrior-active-task-blocklet">Taskwarrior active task blocklet</h1>
+<p><img src="https://img.shields.io/github/v/tag/scmbradley/taskw-i3blocks" alt="GitHub tag (latest SemVer)">
+<img src="https://img.shields.io/maintenance/yes/2021" alt="Maintenance">
+<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black"></a>
+<a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a></p>
+<p>This is the readme for <code>taskw-i3blocks</code> v0.3.1.
+This blocklet shows what task(s) you currently have active in TaskWarrior.
+The blocklet will display the description of one of the active tasks
+and an indication of how many other active tasks you have.</p>
+<p>The script has been tested in python 3.6, 3.8 and 3.9 on ubuntu 20.10 with regolith,
+and has no dependencies apart from a standard python install
+and (obviously) at least one of <a href="https://taskwarrior.org/"><code>taskwarrior</code></a> and <a href="https://timewarrior.net/"><code>timewarrior</code></a>.</p>
+<p>A version of the script has been submitted to <a href="https://github.com/vivien/i3blocks-contrib"><code>i3blocks-contrib</code></a>
+but the most up to date version is available from <a href="https://github.com/scmbradley/taskw-i3blocks">this repo</a>.</p>
+<h2 id="config-options">Config options</h2>
+<ul>
+<li><code>TASKW_TF</code> : whether to display information about tasks (from taskwarrior). By default it displays the description of (one of) the active task(s).</li>
+<li><code>TIMEW_TF</code> : whether to display information about time durations (from timewarrior). Displays minutes and hours. We don't display seconds because the block only updates every 15 seconds, and we don't display longer stretches of time because if you spend more than 24 hours on a task, you aren't making your tasks small enough.</li>
+<li><code>TIMEW_DESC_OVERRIDE</code> : whether to pull task description information from taskwarrior (false) or timewarrior (true). Will also set <code>TIMEW_TF</code> to true if true.</li>
+<li><code>TASKW_MAX_LENGTH</code> : the number of characters to truncate long task descriptions at.</li>
+<li><code>TASKW_NOTASK_MSG</code> : the text to display if there are no active tasks.</li>
+<li><code>TASKW_SORT_URGENCY</code> : a boolean to determine whether to display the most urgent active task (or the default behaviour which is to display the task which has been active longest).</li>
+<li><code>TASKW_PENDING_TF</code> : a boolean to determine whether to display the total number of pending tasks</li>
+<li><code>TASKW_MAIN_FILTER</code> option allows you to select a filter to display. The default is <code>+ACTIVE</code>.</li>
+</ul>
+<h2 id="timewarrior-integration">Timewarrior integration</h2>
+<p>Integration between taskwarrior and timewarrior is via a taskwarrior hook that starts/stops timewarrior when you
+start/stop a task in taskwarrior.
+What this means is that if you have multiple tasks ongoing, the current timew duration is for
+the <em>most recently started</em> task (and the time for the task started earlier will be stopped when a newer task is started).
+So having multiple ongoing tasks doesn't really play nice with timewarrior.
+To make sure the task description matches the task to which the timew duration refers,
+we could do one of two things:
+optionally sort tasks by most recent start time, or
+get the task description from timew directly.
+The former would require a lot messing about parsing times and dates,
+so we can explore the latter.
+Timewarrior tags don't have any sort of hierarchy, so there's no analogue of a task duration's &quot;description&quot; attribute in taskwarrior.
+The description is passed to timewarrior as the first tag by the <code>on-modify</code> hook,
+although this sometimes doesn't work as expected and the first tag is the project instead of tag description,
+and I don't understand why.
+So I don't recommend using this override.</p>
+<p>All this is to explain why only the following modes of use are properly
+supported.</p>
+<h3 id="single-task-taskwtimew-integration">Single task taskw/timew integration</h3>
+<p>Set <code>TASKW_TF</code> true and <code>TIMEW_TF</code> true.
+Use the standard <code>on-modify</code> hook, only ever have <em>one</em> ongoing task.
+Description information is reliably drawn from taskwarrior.</p>
+<h3 id="timew-standalone-usage">Timew standalone usage</h3>
+<p>Set <code>TASKW_TF</code> false and <code>TIMEW_TF</code> true.
+When using <code>timew</code>, make sure that the <em>first</em> tag is the one you want to appear
+in the bar.</p>
+
+            
+            
+        </body>
+        </html>

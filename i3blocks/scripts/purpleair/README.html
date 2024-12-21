@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>purpleair</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="purpleair">purpleair</h1>
+<p>Get air quality readings from <a href="http://purpleair.com">PurpleAir</a> sensors.</p>
+<p><img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/purpleair/purpleair.png" alt=""></p>
+<h1 id="requirements">Requirements</h1>
+<p>Dependencies: perl, curl, jq</p>
+<h1 id="configuration">Configuration</h1>
+<p>A purpleair config block looks like this:</p>
+<pre><code class="language-INI"><span class="hljs-section">[purpleair]</span>
+<span class="hljs-attr">label</span>=
+<span class="hljs-attr">command</span>=<span class="hljs-variable">$SCRIPT_DIR</span>/purpleair
+<span class="hljs-attr">interval</span>=<span class="hljs-number">60</span>
+<span class="hljs-attr">SENSOR_ID</span>=<span class="hljs-number">78305</span>
+<span class="hljs-comment">#TYPE=US_AQI</span>
+<span class="hljs-comment">#COLORS=#85df56,#fbcf4b,#f28c33,#dd4d3c,#cf79e0,#9b2f6a</span>
+<span class="hljs-comment">#NO_COLOR=true</span>
+</code></pre>
+<h2 id="finding-a-sensor-id">Finding a sensor ID</h2>
+<p>If you do not own a PurpleAir sensor, there may be one near you that you can query. Here's how to find a sensor ID:</p>
+<ol>
+<li>Navigate to <a href="http://purpleair.com/map">http://purpleair.com/map</a> and find a reading near you.</li>
+<li>Click on the reading to bring up a details card. (Note, sensors with a block border are indoors. You'll likely want a plain circle).</li>
+<li>At the bottom of the card, hover over &quot;Get This Widget&quot;, and click the &quot;JSON&quot; link.</li>
+<li>The sensor ID is the value of the URL's &quot;show&quot; query parameter.</li>
+</ol>
+<p>If you own a PurpleAir sensor, use its ID. If your sensor is configured to be private, see the <a href="https://www2.purpleair.com/community/faq#hc-access-the-json">PurpleAir FAQ</a> for extra access requirements. If your sensor is public and you do not know its ID, see the instructions above to find it.</p>
+<h2 id="configuration-parameters">Configuration Parameters</h2>
+<p>There is one required parameter, along with some optional ones:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SENSOR_ID</td>
+<td>Required: The PurpleAir sensor to query</td>
+</tr>
+<tr>
+<td>TYPE</td>
+<td>Optional: The air quality computation to perform. Default: US_AQI</td>
+</tr>
+<tr>
+<td>COLORS</td>
+<td>Optional: Comma-separated list of color hex values to use in place of the default colors</td>
+</tr>
+<tr>
+<td>NO_COLOR</td>
+<td>Optional: Any non-empty value causes color to be suppressed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="type">TYPE</h3>
+<p>The valid values for <code>TYPE</code> are:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US_AQI</td>
+<td><a href="https://www.airnow.gov/aqi/aqi-basics/">United States Air Quality Index</a></td>
+</tr>
+<tr>
+<td>EU_AQI</td>
+<td><a href="https://airindex.eea.europa.eu/">European Air Quality Index</a></td>
+</tr>
+<tr>
+<td>CA_AQHI</td>
+<td><a href="https://www.canada.ca/en/environment-climate-change/services/air-quality-health-index/about.html">Canada Air Quality Health Index</a></td>
+</tr>
+<tr>
+<td>IMECA</td>
+<td><a href="https://www.gob.mx/comisionambiental/es/articulos/imeca-indice-metropolitano-de-la-calidad-del-aire">Índice MEtropolitano de la Calidad del Aire</a></td>
+</tr>
+<tr>
+<td>IAS</td>
+<td><a href="http://www.aire.cdmx.gob.mx/default.php?opc=%27ZaBhnmI=&amp;dc=%27Zw==">Índice de Aire y Salud</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="colors">COLORS</h3>
+<p>The <code>COLORS</code> parameter should be specified without spaces or quotes.</p>
+<p>Good: <code>COLORS=#ffffff,#aaaaaa,#888888</code></p>
+<p>Bad: <code>COLORS=&quot;#ffffff,#aaaaaa,#888888&quot;</code></p>
+<p>Bad: <code>COLORS=#ffffff, #aaaaaa, #888888</code></p>
+<p>If fewer colors are specified than the <code>TYPE</code> uses by default, a warning will be printed to <code>stderr</code>. Also, any color index higher than the maximum index given will be reduced to the maximum index.</p>
+<h3 id="no_color">NO_COLOR</h3>
+<p>The <code>NO_COLOR</code> parameter suppresses colors, so the output will use the default output color of the bar.</p>
+<p>Any non-empty value will trigger its effect, but by convention it should be specified <code>NO_COLOR=true</code>.</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

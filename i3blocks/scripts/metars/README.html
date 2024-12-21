@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Introduction</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="introduction">Introduction</h1>
+<p>The purpose of <em>metars</em> script is to deliver reliable weather information. According to Wikipedia METAR weather report (METeorological Aerodrome Report) is &quot;predominantly used by pilots in fulfillment of a part of a pre-flight weather briefing, and by meteorologists, who use aggregated METAR information to assist in weather forecasting.&quot; In addition to showing data directly from a METAR station this script also displays &quot;feels like&quot; (wind chill) temperature for static winds and gusts as explained in the <a href="https://en.wikipedia.org/wiki/Wind_chill">Wind chill</a> Wikipedia article (&quot;The standard wind chill formula&quot;).</p>
+<p>METAR weather stations are typically located at airports and defined by four-letter station codes. The four-letter METAR station data is based on ICAO codes and locations along with their codes can be found in the <a href="https://en.wikipedia.org/wiki/ICAO_airport_code">ICAO airport code</a> Wikipedia article.</p>
+<h1 id="i3blocks-configuration">i3blocks configuration</h1>
+<p>Configuration sample:</p>
+<pre><code>[metars]
+interval=2100
+METARSSTATION=EFHK
+METARSURL=https://tgftp.nws.noaa.gov/data/observations/metar/stations/{}.TXT
+METARSENABLEMENTS={ &quot;temperature&quot;: true, &quot;dewpoint&quot; : false, &quot;feelsLike&quot; : true, &quot;wind&quot; : true, &quot;pressure&quot; : false, &quot;visibility&quot; : false, &quot;windDirType&quot; : &quot;icon&quot;, &quot;useInverseWind&quot; : false }
+METARSCONFIGS={ &quot;temperatureUnit&quot; : &quot;C&quot;, &quot;temperatureSym&quot; : &quot;°C&quot;, &quot;pressureUnit&quot; : &quot;HPA&quot;, &quot;pressureSym&quot; : &quot;hPa&quot;, &quot;speedUnit&quot; : &quot;MPS&quot;, &quot;speedSym&quot; : &quot;m/s&quot;, &quot;distanceUnit&quot; : &quot;KM&quot;, &quot;distanceSym&quot; : &quot;km&quot;, &quot;precipitationUnit&quot; : &quot;CM&quot;, &quot;precipitationSym&quot; : &quot;cm&quot;}
+</code></pre>
+<h2 id="configuration-option-interval">Configuration option <em>interval</em></h2>
+<p>METAR stations are usually updated every 30 or 60 minutes. This example specifies 2100 seconds (35 minutes).</p>
+<h2 id="configuration-option-metarsstation">Configuration option <em>METARSSTATION</em></h2>
+<p>This is the four-letter ICAO airport code. It will be used as part of <em>METARSURL</em>.</p>
+<h2 id="configuration-option-metarsurl">Configuration option <em>METARSURL</em></h2>
+<p>This URL is used when fetching the METAR weather data. This string must include &quot;{}&quot;, replaced by the script with <em>METARSSTATION</em>.</p>
+<h2 id="configuration-option-metarsenablements">Configuration option <em>METARSENABLEMENTS</em></h2>
+<p>These options specify what information is shown on the line. This is a JSON string and each key and value needs to be inside double quotes except for booleans that need to be specified with lower case &quot;true&quot; and &quot;false&quot;.</p>
+<h2 id="configuration-option-metarsenablementstemperature">Configuration option <em>METARSENABLEMENTS/temperature</em></h2>
+<p>This option commands the temperature information to be shown.</p>
+<h2 id="configuration-option-metarsenablementsdewpoint">Configuration option <em>METARSENABLEMENTS/dewpoint</em></h2>
+<p>This option commands the <a href="https://en.wikipedia.org/wiki/Dew_point">dew point</a> information to be shown.</p>
+<h2 id="configuration-option-metarsenablementsfeelslike">Configuration option <em>METARSENABLEMENTS/feelsLike</em></h2>
+<p>This option commands the <a href="https://en.wikipedia.org/wiki/Wind_chill">wind chill</a> information to be shown.</p>
+<h2 id="configuration-option-metarsenablementswind">Configuration option <em>METARSENABLEMENTS/wind</em></h2>
+<p>This option commands the wind information, both static and gusts along with their direction to be shown.</p>
+<h2 id="configuration-option-metarsenablementsvisibility">Configuration option <em>METARSENABLEMENTS/visibility</em></h2>
+<p>This option commands the visibility to be shown. Visibility is diminished during bad weather conditions and over 10 kilometer visibility is usually described as &quot;10 km&quot;.</p>
+<h2 id="configuration-option-metarsenablementswinddirtype">Configuration option <em>METARSENABLEMENTS/windDirType</em></h2>
+<p>This option specifies the wind direction type. Three options are supported. Option <em>angle</em> commands the direction to be shown as angles in clockwise direction. Option <em>text</em> commands the direction to be shown as 1 to 3 letter <a href="https://en.wikipedia.org/wiki/Points_of_the_compass">compass style letters</a>. Option <em>icon</em> commands the direction to be shown as graphical arrow arrow symbol.</p>
+<h2 id="configuration-option-metarsenablementsuseinversewind">Configuration option <em>METARSENABLEMENTS/useInverseWind</em></h2>
+<p>This option modifies the behavior of the <em>windDirType</em> option by rotating the direction 180 degrees. The safest option is to leave this setting as <em>false</em> so that it follows the official wind direction measurement style (described in <a href="https://en.wikipedia.org/wiki/Wind_direction">Wind direction</a> and <a href="https://en.wikipedia.org/wiki/Weather_vane">Wind vane</a> Wikipedia articles). If this option is <em>false</em> its meaning is &quot;wind is from that direction&quot;, if it is <em>true</em> its meaning is &quot;wind is to that direction&quot;. Inverse wind direction is sometimes used in graphical notation where the arrow represents the wind itself.</p>
+<h2 id="configuration-option-metarsconfigs">Configuration option <em>METARSCONFIGS</em></h2>
+<p>These options specify the fine tuning of elements set as visible with the <em>METARSENABLEMENTS</em> options. This is a JSON string and each key and value needs to be inside double quotes except for booleans that need to be specified with lower case &quot;true&quot; and &quot;false&quot;.</p>
+<h2 id="configuration-option-metarsconfigstemperatureunit">Configuration option <em>METARSCONFIGS/temperatureUnit</em></h2>
+<p>This option specifies the <a href="https://github.com/python-metar/python-metar/blob/master/metar/Datatypes.py">temperature unit</a> of <em>python-metar</em>. Currently supported values are <em>F</em> (Fahrenheit), <em>C</em> (Celcius) and <em>K</em> (Kelvin).</p>
+<h2 id="configuration-option-metarsconfigstemperaturesym">Configuration option <em>METARSCONFIGS/temperatureSym</em></h2>
+<p>This option specifies the type of symbol or text to be shown on the line after the temperature value.</p>
+<h2 id="configuration-option-metarsconfigpressureunit">Configuration option <em>METARSCONFIG/pressureUnit</em></h2>
+<p>This option specifies the <a href="https://github.com/python-metar/python-metar/blob/master/metar/Datatypes.py">barometric pressure unit</a> of <em>python-metar</em>. Currently supported values are <em>MB</em> (millibar), <em>HPA</em> (hectopascal) and <em>IN</em> (inch of mercury).</p>
+<h2 id="configuration-option-metarsconfigpressuresym">Configuration option <em>METARSCONFIG/pressureSym</em></h2>
+<p>This option specifies the type of symbol or text to be shown on the line after the barometric pressure value.</p>
+<h2 id="configuration-option-metarsconfigspeedunit">Configuration option <em>METARSCONFIG/speedUnit</em></h2>
+<p>This option specifies the <a href="https://github.com/python-metar/python-metar/blob/master/metar/Datatypes.py">speed unit</a> of <em>python-metar</em>. Currently supported values are <em>KT</em> (knots), <em>MPS</em> (meters per second), <em>KMH</em> (kilometers per hour) and <em>MPH</em> (miles per hour).</p>
+<h2 id="configuration-option-metarsconfigspeedsym">Configuration option <em>METARSCONFIG/speedSym</em></h2>
+<p>This option specifies the type of symbol or text to be shown on the line after the speed value.</p>
+<h2 id="configuration-option-metarsconfigdistanceunit">Configuration option <em>METARSCONFIG/distanceUnit</em></h2>
+<p>This option specifies the <a href="https://github.com/python-metar/python-metar/blob/master/metar/Datatypes.py">distance unit</a> of <em>python-metar</em>. Currently supported values are <em>SM</em> (miles), <em>MI</em> (miles), <em>M</em> (meters), <em>KM</em> (kilometers), <em>FT</em> (feet) and <em>IN</em> (inches).</p>
+<h2 id="configuration-option-metarsconfigdistancesym">Configuration option <em>METARSCONFIG/distanceSym</em></h2>
+<p>This option specifies the type of symbol or text to be shown on the line after the distance value.</p>
+<h2 id="configuration-option-metarsconfigprecipitationunit">Configuration option <em>METARSCONFIG/precipitationUnit</em></h2>
+<p>This option specifies the <a href="https://github.com/python-metar/python-metar/blob/master/metar/Datatypes.py">precipitation unit</a> of <em>python-metar</em>. Currently supported values are &quot;IN&quot; (inches) and &quot;CM&quot; (centimeters).</p>
+<h2 id="configuration-option-metarsconfigprecipitationsym">Configuration option <em>METARSCONFIG/precipitationSym</em></h2>
+<p>This option specifies the type of symbol or text to be shown on the line after the precipitation value.</p>
+<h2 id="other-configuration-options">Other configuration options</h2>
+<p>Other related options are <em>command</em> and <em>separator_block_width</em> but these can be defined outside the blocklets.</p>
+<h1 id="behavior">Behavior</h1>
+<p>Clicking the <em>metars</em> status line causes the status line to be updated and raw METAR updated status to be displayed with <em>libnotify</em> (<em>notify-send</em>). This behavior requires <em>libnotify</em> package to be installed, possibly also package <em>dunst</em> or any other similar option. The title bar clicking behavior reacts to left, middle and right buttons but may be configured to any number of buttons. The most essential package for this script is the <em>python-metar</em> package, installed with &quot;python pip python-metar&quot;.</p>
+
+            
+            
+        </body>
+        </html>

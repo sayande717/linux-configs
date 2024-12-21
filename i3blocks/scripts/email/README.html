@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>email</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="email">email</h1>
+<p>Show the count of new messages in your
+email box using IMAP.
+Left button mouse click opens custom URL.</p>
+<p><img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/email/email.png" alt="message"></p>
+<h1 id="dependencies">Dependencies</h1>
+<p>Python 3, <a href="https://pypi.python.org/pypi/keyring">python-keyring</a> (optional),
+gnome-keyring (if pyton-keyring using, also you able to use any other
+compatible backend)</p>
+<p><strong>Packages names in Debian based distros</strong>:
+python3, python3-keyring, gnome-keyring</p>
+<p><strong>Packages names in Arch Linux</strong>:
+python, python-keyring, gnome-keyring</p>
+<p>Alternatively you can get python-keyring with
+<a href="https://pypi.python.org/pypi/pip">pip</a>:</p>
+<pre><code class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install keyring</span>
+</code></pre>
+<h1 id="usage">Usage</h1>
+<p>There are two ways to set up email blocklet. You able to specify options in
+<strong>&quot;Settings&quot;</strong> section inside <a href="email">email</a> file. And if you not allowed to
+edit email file, or if you want to use multiple instances of email block, you
+could make config file for each instance in <strong>~/.config/i3blocks-email/</strong>
+directory.</p>
+<p>Now keep in mind, that there are also two ways to specify your mailbox password.
+One way is to past it between apostrophes in PASS line in blocklet or config
+file. <strong>It is not secure and it is recommended for debugging only!</strong></p>
+<p>Another way is to use a system keyring. In this way you should keep PASS empty
+as is. To add your password to keyring run:</p>
+<pre><code class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-variable">$SCRIPT_DIR</span>/email --add <span class="hljs-variable">$USER</span></span>
+</code></pre>
+<p>where $USER is your mailbox login.</p>
+<p><strong>python-keyring and compatible backend should be installed and be in $PATH.</strong></p>
+<p>You also able to delete key with:</p>
+<pre><code class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-variable">$SCRIPT_DIR</span>/email --remove <span class="hljs-variable">$USER</span></span>
+</code></pre>
+<p>Now add a section to your i3blocks.conf like following:</p>
+<pre><code class="language-INI"><span class="hljs-section">[email]</span>
+<span class="hljs-attr">command</span>=<span class="hljs-variable">$SCRIPT_DIR</span>/email
+<span class="hljs-attr">interval</span>=<span class="hljs-number">300</span>
+<span class="hljs-attr">min_width</span>=messages: <span class="hljs-number">99</span>
+</code></pre>
+<p>If you want to use instance mechanism of i3blocks, you should make config file
+in directory <strong>~/.config/i3blocks-email/</strong> with following structure:</p>
+<pre><code class="language-INI"><span class="hljs-section">[MAIL]</span>
+
+HOST: imap.mail_server.com
+PORT: 993
+USER: my_mailbox@mail_server.com
+PASS:
+URL: https://www.mail_server.com
+
+</code></pre>
+<p>The [MAIL] header should exist. Any options are optional and replace the same
+options inside <a href="email">email</a>.
+The minimal config file is:</p>
+<pre><code class="language-INI"><span class="hljs-section">[MAIL]</span>
+
+HOST: imap.mail_server.com
+USER: my_mailbox@mail_server.com
+</code></pre>
+<p>When config files is created, add an instance option with name of config file
+to your i3blocks.conf. Let's imagine, that we have the
+~/.config/i3blocks-email/my_mailbox_config file, then email section should be:</p>
+<pre><code class="language-ini"><span class="hljs-section">[email]</span>
+<span class="hljs-attr">command</span>=<span class="hljs-variable">$SCRIPT_DIR</span>/email
+<span class="hljs-attr">instance</span>=my_mailbox_config
+<span class="hljs-attr">interval</span>=<span class="hljs-number">60</span>
+<span class="hljs-attr">min_width</span>=messages: <span class="hljs-number">99</span>
+</code></pre>
+<p>After configuring blocklet restart your window manager.
+New block should appear in the i3bar.</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

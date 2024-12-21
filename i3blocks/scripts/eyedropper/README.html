@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Eyedropper</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 22px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="eyedropper">Eyedropper</h1>
+<p>Simple and convenient tool to identify the hex value of any color on the screen. Simply click on the icon:</p>
+<p><img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/eyedropper/eyedropper_startup.png" alt=""></p>
+<p>Your mouse will become a crosshair. Click on any color you desire and both the color and the hex value will be displayed.</p>
+<p><img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/eyedropper/eyedropper_example1.png" alt="">
+<img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/eyedropper/eyedropper_example2.png" alt="">
+<img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/eyedropper/eyedropper_example3.png" alt=""></p>
+<p>Should you select the color of your bar, you will not be able to see the icon (as the icon and the bar are the same color), but you will still be able to read the hex value
+<img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/eyedropper/eyedropper_same_color.png" alt=""></p>
+<h3 id="dependencies">Dependencies</h3>
+<ol>
+<li>Ensure <strong>grabc</strong> is installed. For debian:</li>
+</ol>
+<pre><code>$ sudo apt-get install grabc
+</code></pre>
+<p>For more information, visit <a href="https://github.com/muquit/grabc">muquit/grabc</a></p>
+<ol start="2">
+<li><a href="https://github.com/FortAwesome/Font-Awesome">fontawesome</a></li>
+</ol>
+<h3 id="optional-dependencies">Optional Dependencies</h3>
+<ol>
+<li>
+<p>xclip - for copying the value to clipboard in i3</p>
+</li>
+<li>
+<p>slurp, grim, imagemagick - for picking the color in SwayWM</p>
+</li>
+<li>
+<p>wl-clipboard - for copying the value to clipboard in SwayWM</p>
+</li>
+</ol>
+<h1 id="installation">Installation</h1>
+<ol>
+<li>Copy script to your directory of choice</li>
+<li>Give it execution permission (<code>chmod +x eyedropper</code>)</li>
+<li>Add the following blocklet to your i3blocks.conf:</li>
+</ol>
+<h3 id="configuring-i3blocks">Configuring i3blocks</h3>
+<pre><code class="language-ini"><span class="hljs-section">[eyedropper]</span>
+<span class="hljs-attr">command</span>=<span class="hljs-variable">$SCRIPT_DIR</span>/eyedropper
+<span class="hljs-attr">full_text</span>=&lt;span foreground=<span class="hljs-string">&quot;#ffffff&quot;</span>&gt;&lt;/span&gt;
+instance=<span class="hljs-comment">#ffffff</span>
+<span class="hljs-attr">markup</span>=pango
+<span class="hljs-comment">#CLIPBOARD=true</span>
+<span class="hljs-comment">#SWAY=true</span>
+</code></pre>
+<ul>
+<li>Change the &quot;foreground&quot; value in &quot;full_text&quot; to change the color of the initial eyedropper icon</li>
+<li>Change the &quot;instance&quot; value to change the color of the hex value displayed</li>
+</ul>
+<p>Two environment variable configuration options are supported:</p>
+<ol>
+<li>CLIPBOARD=true - Copy the color value to the clipboard in addition to updating the string</li>
+<li>SWAY=true - Do color picking in a way that works when running in SwayWM (Wayland)</li>
+</ol>
+<h3 id="sample-look">Sample Look</h3>
+<p><img src="file:////mnt/d/serve/Development/Personal/linux-configs/i3blocks/scripts/eyedropper/eyedropper_sample.png" alt=""></p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
