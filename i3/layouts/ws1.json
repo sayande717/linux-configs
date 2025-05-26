@@ -11,11 +11,11 @@
             "floating": "auto_off",
             "layout": "splith",
             "marks": [],
-            "percent": 0.528757546870035,
+            "percent": 0.6,
             "type": "con",
             "nodes": [
                 {
-                    "border": "none",
+                    "border": "normal",
                     "current_border_width": 2,
                     "floating": "auto_off",
                     "geometry": {
@@ -25,33 +25,33 @@
                        "y": 0
                     },
                     "marks": [],
-                    "name": "home",
-                    "percent": 0.59375,
+                    "name": "terminal",
+                    "percent": 0.5,
                     "swallows": [
                        {
-                            "class": "^ws1$",
-                            "instance":"^home0"
+                        "class": "^ws1$",
+                        "instance": "^downloads0$"
                        }
                     ],
                     "type": "con"
                 },
                 {
-                    "border": "none",
+                    "border": "normal",
                     "current_border_width": 2,
                     "floating": "auto_off",
                     "geometry": {
-                       "height": 1017,
-                       "width": 956,
+                       "height": 318,
+                       "width": 1916,
                        "x": 0,
                        "y": 0
                     },
                     "marks": [],
-                    "name": "root",
-                    "percent": 0.40625,
+                    "name": "terminal",
+                    "percent": 0.5,
                     "swallows": [
                        {
-                            "class": "^ws1$",
-                            "instance": "^root0$"
+                        "class": "^ws1$",
+                        "instance": "^downloads1$"
                        }
                     ],
                     "type": "con"
@@ -60,73 +60,21 @@
         },
         {
             "border": "normal",
-            "floating": "auto_off",
-            "layout": "splith",
-            "marks": [],
-            "percent": 0.428662217985383,
-            "type": "con",
-            "nodes": [
-                {
-                    "border": "none",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "geometry": {
-                       "height": 1017,
-                       "width": 956,
-                       "x": 0,
-                       "y": 0
-                    },
-                    "marks": [],
-                    "name": "hd0",
-                    "percent": 0.453125,
-                    "swallows": [
-                       {
-                            "class": "^ws1$",
-                            "instance": "^hd00$"
-                       }
-                    ],
-                    "type": "con"
-                },
-                {
-                    "border": "none",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "geometry": {
-                       "height": 398,
-                       "width": 1016,
-                       "x": 0,
-                       "y": 0
-                    },
-                    "marks": [],
-                    "name": "downloads",
-                    "percent": 0.546875,
-                    "swallows": [
-                       {
-                            "class": "^ws1$",
-                            "instance": "^downloads0$"
-                       }
-                    ],
-                    "type": "con"
-                }
-            ]
-        },
-        {
-            "border": "none",
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
                "height": 1017,
-               "width": 956,
+               "width": 1916,
                "x": 0,
                "y": 0
             },
             "marks": [],
-            "name": "root",
-            "percent": 0.0425802351445823,
+            "name": "terminal",
+            "percent": 0.4,
             "swallows": [
                {
-                    "class": "^ws1$",
-                    "instance": "^root1$"
+                "class": "^ws1$",
+                "instance": "^home0$"
                }
             ],
             "type": "con"

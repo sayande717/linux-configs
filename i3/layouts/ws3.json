@@ -3,47 +3,49 @@
     "floating": "auto_off",
     "layout": "tabbed",
     "marks": [],
-    "percent": 1,
+    "percent": null,
     "type": "con",
     "nodes": [
         {
-            "border": "none",
+            "border": "normal",
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 1019,
-               "width": 1920,
+               "height": 985,
+               "width": 1600,
                "x": 0,
                "y": 0
             },
             "marks": [],
-            "name": "home",
+            "name": "LibreWolf",
             "percent": 0.5,
             "swallows": [
                {
-                    "class": "^ws3$",
-                    "instance": "^home0$"
+                "class": "^librewolf$",
+                "instance": "^Navigator$",
+                "window_role": "^browser$"
                }
             ],
             "type": "con"
         },
         {
-            "border": "none",
+            "border": "normal",
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 987,
+               "height": 493,
                "width": 1916,
-               "x": 0,
-               "y": 0
+               "x": 2,
+               "y": 585
             },
             "marks": [],
-            "name": "hd0",
+            "name": "how to remove wayland and switch to X11 on Arch Linux - Brave",
             "percent": 0.5,
             "swallows": [
                {
-                    "class": "^ws3$",
-                    "instance": "^hd00$"
+                "class": "^Brave\\-browser$",
+                "instance": "^brave\\-browser$",
+                "window_role": "^browser$"
                }
             ],
             "type": "con"

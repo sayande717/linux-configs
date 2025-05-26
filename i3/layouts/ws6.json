@@ -1,7 +1,7 @@
 {
     "border": "normal",
     "floating": "auto_off",
-    "layout": "stacked",
+    "layout": "tabbed",
     "marks": [],
     "percent": 1,
     "type": "con",
@@ -11,39 +11,18 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 600,
-               "width": 800,
-               "x": 560,
-               "y": 240
-            },
-            "marks": [],
-            "name": "Spotify",
-            "percent": 0.333333333333333,
-            "swallows": [
-               {
-                   "class": "^Spotify$",
-                   "instance": "^spotify$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "none",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 1019,
-               "width": 1920,
+               "height": 1080,
+               "width": 1280,
                "x": 0,
                "y": 0
             },
             "marks": [],
-            "name": "Easy Effects",
-            "percent": 0.333333333333333,
+            "name": "Mozilla Thunderbird",
+            "percent": 0.25,
             "swallows": [
                {
-                   "class": "^easyeffects$",
-                   "instance": "^easyeffects$"
+                "class": "^thunderbird$",
+                "instance": "^Mail$"
                }
             ],
             "type": "con"
@@ -53,22 +32,64 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 320,
-               "width": 600,
-               "x": 660,
-               "y": 380
+               "height": 1007,
+               "width": 1906,
+               "x": 7,
+               "y": 66
             },
             "marks": [],
-            "name": "solaar",
-            "percent": 0.333333333333333,
+            "name": "Beeper",
+            "percent": 0.25,
             "swallows": [
                {
-                   "class": "^Solaar$",
-                   "instance": "^solaar$"
+                "class": "^Beeper$",
+                "instance": "^beeper$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "none",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 642,
+               "width": 818,
+               "x": 551,
+               "y": 208
+            },
+            "marks": [],
+            "name": "Telegram",
+            "percent": 0.25,
+            "swallows": [
+               {
+                "class": "^TelegramDesktop$",
+                "instance": "^telegram\\-desktop$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "normal",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1007,
+               "width": 1906,
+               "x": 7,
+               "y": 66
+            },
+            "marks": [],
+            "name": "Discord",
+            "percent": 0.25,
+            "swallows": [
+               {
+                "class": "^discord$",
+                "instance": "^discord$",
+                "title": "^Friends\\ \\-\\ Discord$"
                }
             ],
             "type": "con"
         }
     ]
 }
-

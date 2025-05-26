@@ -11,18 +11,18 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 1019,
-               "width": 1920,
-               "x": 0,
-               "y": 0
+               "height": 1049,
+               "width": 640,
+               "x": 1280,
+               "y": 31
             },
             "marks": [],
-            "name": "edit dev 0",
+            "name": "Obsidian",
             "percent": 0.5,
             "swallows": [
                {
-               "class": "^ws0$",
-               "instance": "^dev0$"
+                "class": "^obsidian$",
+                "instance": "^obsidian$"
                }
             ],
             "type": "con"
@@ -35,15 +35,15 @@
                "height": 1019,
                "width": 1920,
                "x": 0,
-               "y": 0
+               "y": 61
             },
             "marks": [],
-            "name": "edit dev 1",
+            "name": "Visual Studio Code",
             "percent": 0.5,
             "swallows": [
                {
-               "class": "^ws0$",
-               "instance": "^dev1$"
+                "class": "^Code$",
+                "instance": "^code$"
                }
             ],
             "type": "con"

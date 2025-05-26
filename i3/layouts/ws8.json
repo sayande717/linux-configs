@@ -1,9 +1,9 @@
 {
     "border": "normal",
     "floating": "auto_off",
-    "layout": "stacked",
+    "layout": "tabbed",
     "marks": [],
-    "percent": 1,
+    "percent": null,
     "type": "con",
     "nodes": [
         {
@@ -11,103 +11,18 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 927,
+               "height": 987,
                "width": 1916,
                "x": 0,
                "y": 0
             },
             "marks": [],
-            "name": "Mozilla Thunderbird",
-            "percent": 0.2,
+            "name": "Virtual Machine Manager",
+            "percent": 1,
             "swallows": [
                {
-               "class": "^thunderbird$",
-               "instance": "^Mail$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "normal",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 985,
-               "width": 1600,
-               "x": 0,
-               "y": 0
-            },
-            "marks": [],
-            "name": "Mail",
-            "percent": 0.2,
-            "swallows": [
-               {
-               "class": "^LibreWolf$",
-               "instance": "^Navigator$",
-               "title": "LibreWolf"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "normal",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 927,
-               "width": 1916,
-               "x": 2,
-               "y": 151
-            },
-            "marks": [],
-            "name": "Discord",
-            "percent": 0.2,
-            "swallows": [
-               {
-               "class": "^discord$",
-               "instance": "^discord$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "none",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 957,
-               "width": 1916,
-               "x": 2,
-               "y": 121
-            },
-            "marks": [],
-            "name": "Telegram",
-            "percent": 0.2,
-            "swallows": [
-               {
-               "class": "^TelegramDesktop$",
-               "instance": "^telegram\\-desktop$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "normal",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 957,
-               "width": 1916,
-               "x": 2,
-               "y": 121
-            },
-            "marks": [],
-            "name": "Matrix: Element",
-            "percent": 0.2,
-            "swallows": [
-               {
-                    "class": "^Element$",
-                    "instance": "^element$"
+                "class": "^Virt\\-manager$",
+                "instance": "^virt\\-manager$"
                }
             ],
             "type": "con"
