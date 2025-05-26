@@ -39,11 +39,11 @@ END {
    printf("%.f%%\n%.f%%\n",mem_pct,mem_pct)
 
    if (mem_pct > 40) {
-      print("#00FF05")
-   } else if (mem_pct > 20) {
+      print("#A8FF00")
+   } else if (mem_pct > 25) {
       print("#FFF600")
    } else {
-      print("#FF7400")
+      print("#FF0000")
    }
 
 }

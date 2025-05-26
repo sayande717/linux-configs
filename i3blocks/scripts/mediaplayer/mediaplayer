@@ -131,7 +131,7 @@ sub playerctl {
 
     # push(@metadata, $artist) if $artist;
 
-    my $title = qx(playerctl $player_arg metadata title);
+    # my $title = qx(playerctl $player_arg metadata title);
     exit(0) if $? || $title eq '(null)';
     $title = `echo "$title" | cut -c -17`;
     chomp($title);

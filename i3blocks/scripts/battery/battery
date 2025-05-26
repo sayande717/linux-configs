@@ -35,7 +35,7 @@ if (not defined($acpi)) {
     # don't print anything to stderr if there is no battery
     exit(0);
 }
-elsif ($acpi !~ /: ([\w\s]+), (\d+)%/) {
+elsif ($acpi !~ /: ([\w\s]+), ([\d\].]+)%/) {
 	die "$acpi\n";
 }
 
@@ -79,12 +79,10 @@ print "$short_text\n";
 
 if ($percent < 20) {
     print "#FF0000\n";
-} elsif ($percent < 30) {
-	print "#FFAE00\n";
-} elsif ($percent < 50) {
+} elsif ($percent < 40) {
 	print "#FFF600\n";
-} elsif ($percent < 100) {
-	print "#A8FF00\n";
+} else {
+    print "#A8FF00\n";
 }
 
 if ($percent < 5) {
